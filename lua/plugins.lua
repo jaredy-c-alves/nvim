@@ -14,6 +14,8 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 
+	use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup { map_cr = true } end }
+
 	if packer_bootstrap then
 		require('packer').sync()
 	end
