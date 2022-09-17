@@ -14,7 +14,14 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 
-	use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup { map_cr = true } end }
+	use {
+		"windwp/nvim-autopairs",
+		config = function() require("nvim-autopairs").setup { map_cr = true } end
+	}
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+	}
 
 	use 'neovim/nvim-lspconfig'
 	use 'ms-jpq/coq_nvim'
