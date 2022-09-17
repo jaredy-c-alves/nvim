@@ -23,12 +23,15 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
+vim.g.coq_settings = { auto_start = 'shut-up' }
+
 local lsp = require('lspconfig')
+local coq = require('coq')
 local flags = { debounce_text_changes = 150 }
 local servers = { 'sumneko_lua' }
 for i, server in pairs(servers) do
-	lsp[server].setup({
+	lsp[server].setup(coq.lsp_ensure_capabilities({
 		on_attach = on_attach,
 		flags = flags,
-	})
+	}))
 end
