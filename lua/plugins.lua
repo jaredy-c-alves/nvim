@@ -16,6 +16,8 @@ return require('packer').startup(function(use)
 
 	use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup { map_cr = true } end }
 
+	use 'neovim/nvim-lspconfig'
+
 	if packer_bootstrap then
 		require('packer').sync()
 	end
