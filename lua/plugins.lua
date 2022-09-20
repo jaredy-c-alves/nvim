@@ -12,10 +12,22 @@ end
 local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
+	-- Packer
 	use 'wbthomason/packer.nvim'
 
+	-- 42
 	use '42Paris/42header'
 
+	-- LSP
+	use 'neovim/nvim-lspconfig'
+	use 'ms-jpq/coq_nvim'
+	use 'ms-jpq/coq.artifacts'
+	use 'ms-jpq/coq.thirdparty'
+
+	-- Colorscheme
+	use 'doums/darcula'
+
+	-- Tools
 	use {
 		"windwp/nvim-autopairs",
 		config = function() require("nvim-autopairs").setup { map_cr = true } end
@@ -24,13 +36,6 @@ return require('packer').startup(function(use)
 		'nvim-treesitter/nvim-treesitter',
 		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
 	}
-
-	use 'neovim/nvim-lspconfig'
-	use 'ms-jpq/coq_nvim'
-	use 'ms-jpq/coq.artifacts'
-	use 'ms-jpq/coq.thirdparty'
-
-	use 'doums/darcula'
 
 	if packer_bootstrap then
 		require('packer').sync()
