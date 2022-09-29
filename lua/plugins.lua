@@ -25,7 +25,7 @@ return require('packer').startup(function(use)
 	use 'ms-jpq/coq.thirdparty'
 
 	-- Colorscheme
-	use 'doums/darcula'
+	use 'folke/tokyonight.nvim'
 
 	-- Tools
 	use {

@@ -13,5 +13,4 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 
 -- Colorscheme
-vim.cmd 'colorscheme darcula'
-vim.cmd 'set termguicolors'
+vim.cmd 'colorscheme tokyonight-night'
