@@ -15,23 +15,24 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
 	vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-	vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
+	vim.keymap.set('n', '<leader>wl', function()
+		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, bufopts)
 	vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
 	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-	vim.keymap.set('n', '<leader>ft', vim.lsp.buf.format, bufopts)
+	vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
+local lspconfig = require('lspconfig')
+local lsp_flags = { debounce_text_changes = 150 }
 vim.g.coq_settings = { auto_start = 'shut-up' }
 
-local lsp = require('lspconfig')
-local coq = require('coq')
-local flags = { debounce_text_changes = 150 }
-local servers = { 'sumneko_lua', 'pyright', 'tsserver', 'eslint' }
-for i, server in ipairs(servers) do
-	lsp[server].setup(coq.lsp_ensure_capabilities({
+local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua' }
+for _, lsp in ipairs(servers) do
+	lspconfig[lsp].setup(require('coq').lsp_ensure_capabilities({
 		on_attach = on_attach,
-		flags = flags,
+		flags = lsp_flags,
 	}))
 end
