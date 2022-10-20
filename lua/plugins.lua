@@ -20,7 +20,7 @@ return require('packer').startup(function(use)
 
 	-- LSP
 	use 'neovim/nvim-lspconfig'
-	use 'ms-jpq/coq_nvim'
+	use { 'ms-jpq/coq_nvim', run = 'python3 -m coq deps' }
 	use 'ms-jpq/coq.artifacts'
 	use 'ms-jpq/coq.thirdparty'
 
